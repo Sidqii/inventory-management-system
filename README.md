@@ -1,0 +1,1 @@
+ERD diagram: [db diagram.io](https://dbdiagram.io/d/inventaris_pamsis-6a04006b54a51d93d310b7ad)
