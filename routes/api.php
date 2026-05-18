@@ -6,21 +6,39 @@ use App\Http\Controllers\Api\Catalog\ProductController;
 use App\Http\Controllers\Api\Catalog\UnitController;
 use App\Http\Controllers\Api\Catalog\WarehouseController;
 use App\Http\Controllers\Api\Inventory\StockController;
+use App\Http\Controllers\Api\Transaction\StockRequestController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/register', [AuthController::class, 'store']);
+Route::prefix('authentication')->group(function () {
+    Route::post('/register', [AuthController::class, 'store']);
+    Route::post('/login', [AuthController::class, 'login']);
+});
 
-Route::post('/login', [AuthController::class, 'login']);
-
-Route::apiResource('/user', AuthController::class);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('/unit', UnitController::class);
-    Route::apiResource('/category', CategoryController::class);
+    Route::apiResource('/user', AuthController::class);
 
-    Route::apiResource('/product', ProductController::class);
+    Route::prefix('catalog')->group(function () {
+        Route::apiResource('/unit', UnitController::class);
+        Route::apiResource('/category', CategoryController::class);
 
-    Route::apiResource('/warehouse', WarehouseController::class);
+        Route::apiResource('/product', ProductController::class);
 
-    Route::apiResource('/stock', StockController::class);
+        Route::apiResource('/warehouse', WarehouseController::class);
+        Route::apiResource('/stock', StockController::class);
+    });
+
+    Route::prefix('transaction')->group(function () {
+        Route::post('/request', [StockRequestController::class, 'store']);
+
+        Route::post('/approve/{stockRequest}', [StockRequestController::class, 'approve']);
+        Route::post('/fulfill/{stockRequest}', [StockRequestController::class, 'fulfill']);
+
+        Route::put('/update/{stockRequest}', [StockController::class, 'update']);
+
+        Route::get('/request-item', [StockRequestController::class, 'index']);
+        Route::get('/request-item/{stockRequest}', [StockRequestController::class, 'show']);
+    });
+
+    Route::post('/logout', [AuthController::class, 'logout']);
 });

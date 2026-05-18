@@ -33,19 +33,18 @@ class StockRequestResource extends JsonResource
                 'name' => $this->warehouse?->name,
             ],
 
-            'approver' => $this->approver ? [
+            'approved_by' => $this->approver ? [
                 'id' => $this->approver->id,
                 'name' => $this->approver->name,
                 'email' => $this->approver->email,
             ] : null,
+            'approved_at' => $this->approved_at,
 
             'completed_by' => $this->completedBy ? [
                 'id' => $this->completedBy->id,
                 'name' => $this->completedBy->name,
                 'email' => $this->completedBy->email,
             ] : null,
-
-            'approved_at' => $this->approved_at,
             'completed_at' => $this->completed_at,
 
             'items' => StockRequestItemResource::collection(

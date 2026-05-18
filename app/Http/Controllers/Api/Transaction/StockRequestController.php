@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Transaction;
 
+use App\Enum\Transaction\StockMovementType;
 use App\Enum\Transaction\StockRequestStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Transaction\ApproveStockRequest;
@@ -36,7 +37,7 @@ class StockRequestController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Make user request form
      */
     public function store(StoreStockRequest $request)
     {
@@ -190,7 +191,7 @@ class StockRequestController extends Controller
                 'warehouse_id' => $stockRequest->warehouse_id,
                 'reference_type' => $stockRequest::class,
                 'reference_id' => $stockRequest->id,
-                'movement_type' => 'OUT',
+                'movement_type' => StockMovementType::OUT,
                 'movement_number' => 'MOV-' . now()->format('YmdHis'),
                 'note' => $stockRequest->note,
             ]);

@@ -10,7 +10,6 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -75,9 +74,13 @@ class AuthController extends Controller
         //
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        //
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'message' => 'Logout successfuly',
+        ]);
     }
 
     /**
