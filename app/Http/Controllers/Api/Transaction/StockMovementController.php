@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\Transaction;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Trasnsaction\StockMovementResource;
+use App\Models\Transactions\StockMovement;
 use Illuminate\Http\Request;
 
 class StockMovementController extends Controller
@@ -12,7 +14,14 @@ class StockMovementController extends Controller
      */
     public function index()
     {
-        //
+        $stockMovents = StockMovement::with([
+            'user',
+            'warehouse',
+            'items.product',
+            'reference',
+        ])->latest()->paginate();
+
+        return StockMovementResource::collection($stockMovents);
     }
 
     /**
@@ -26,9 +35,16 @@ class StockMovementController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(StockMovement $stockMovement)
     {
-        //
+        $stockMovement->load([
+            'user',
+            'warehouse',
+            'items.product',
+            'reference',
+        ]);
+
+        return new StockMovementResource($stockMovement);
     }
 
     /**

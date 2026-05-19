@@ -45,7 +45,7 @@ class UpdateStockRequest extends FormRequest
                 'min:1',
             ],
 
-            'item.*.note' => ['nullable', 'string'],
+            'items.*.note' => ['nullable', 'string'],
         ];
     }
 }

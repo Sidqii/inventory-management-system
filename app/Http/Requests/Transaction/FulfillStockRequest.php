@@ -31,7 +31,7 @@ class FulfillStockRequest extends FormRequest
                 'exists:stock_request_items,id',
             ],
 
-            'items.*.quantity_approved' => [
+            'items.*.quantity_issued' => [
                 'required',
                 'integer',
                 'min:0',

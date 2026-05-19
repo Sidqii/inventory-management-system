@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Trasnsaction;
 
+use App\Http\Resources\Catalog\ProductResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,9 +19,9 @@ class StockRequestItemResource extends JsonResource
             'id' => $this->id,
 
             'product' => [
-                'id' => $this->product?->id,
-                'name' => $this->product?->name,
-                'code' => $this->product?->code,
+                'id' => $this->product->id,
+                'sku' => $this->product->sku,
+                'name' => $this->product->name,
             ],
 
             'quantity_requested' => $this->quantity_requested,

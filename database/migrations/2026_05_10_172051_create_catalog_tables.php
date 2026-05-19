@@ -22,7 +22,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('symbol');
-            $table->text('description')->nullable();
             $table->timestamps();
         });
 
@@ -52,8 +51,8 @@ return new class extends Migration
         Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
 
-            $table->string('code')->unique();
             $table->string('name');
+            $table->string('code')->unique();
             $table->string('location')->nullable();
 
             $table->timestamps();

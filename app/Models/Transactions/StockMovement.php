@@ -6,7 +6,6 @@ use App\Enum\Transaction\StockMovementType;
 use App\Models\Catalog\Warehouse;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use Override;
 
 class StockMovement extends Model
 {

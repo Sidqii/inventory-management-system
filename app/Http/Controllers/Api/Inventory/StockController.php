@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Inventory\StockRequestForm;
 use App\Http\Resources\Inventory\StockResource;
 use App\Models\Inventory\Stock;
-use Illuminate\Http\Request;
 
 class StockController extends Controller
 {
@@ -25,9 +24,9 @@ class StockController extends Controller
      */
     public function store(StockRequestForm $request)
     {
-        $data = Stock::updateOrCreate($request->validated());
+        $stock = Stock::updateOrCreate($request->validated());
 
-        return new StockResource($data);
+        return new StockResource($stock);
     }
 
     /**
@@ -35,15 +34,21 @@ class StockController extends Controller
      */
     public function show(Stock $stock)
     {
-        //
+        return new StockResource($stock);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Stock $stock)
+    public function update(StockRequestForm $request, Stock $stock)
     {
-        //
+        $data = $request->validated();
+
+        $stock->update($data);
+
+        $stock->refresh();
+
+        return new StockResource($stock);
     }
 
     /**
@@ -51,6 +56,8 @@ class StockController extends Controller
      */
     public function destroy(Stock $stock)
     {
-        //
+        $stock->delete();
+
+        return response()->noContent();
     }
 }
