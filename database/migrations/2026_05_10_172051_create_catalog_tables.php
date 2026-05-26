@@ -42,8 +42,6 @@ return new class extends Migration
 
             $table->unsignedBigInteger('minimum_stock')->default(0);
 
-            $table->string('image_path')->nullable();
-
             $table->timestamps();
             $table->softDeletes();
         });

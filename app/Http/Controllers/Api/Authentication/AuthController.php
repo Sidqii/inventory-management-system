@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of User.
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
@@ -24,7 +25,9 @@ class AuthController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Function for Registration.
+     * @param RegisterRequest $request
+     * @return UserResource
      */
     public function store(RegisterRequest $request)
     {
@@ -39,13 +42,20 @@ class AuthController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified user.
+     * @param User $user
+     * @return UserResource
      */
     public function show(User $user)
     {
         return new UserResource($user);
     }
 
+    /**
+     * Function for Logging in.
+     * @param LoginRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(LoginRequest $request)
     {
         if (! User::where('email', $request->email)->exists()) {
@@ -67,13 +77,21 @@ class AuthController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Has not been implemented yet
+     * @param Request $request
+     * @param string $id
+     * @return void
      */
     public function update(Request $request, string $id)
     {
-        //
+        throw new \Exception("Not implemented");
     }
 
+    /**
+     * Function for Logging out
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
@@ -84,10 +102,12 @@ class AuthController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Has not been implemented yet
+     * @param string $id
+     * @return void
      */
     public function destroy(string $id)
     {
-        //
+        throw new \Exception("Not implemented");
     }
 }

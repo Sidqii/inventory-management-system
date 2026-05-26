@@ -8,6 +8,11 @@ use App\Models\Catalog\Warehouse;
 
 class WarehouseController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Warehouse::class, 'warehouse');
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Attachments\AttachmentController;
 use App\Http\Controllers\Api\Authentication\AuthController;
 use App\Http\Controllers\Api\Catalog\CategoryController;
 use App\Http\Controllers\Api\Catalog\ProductController;
@@ -23,6 +24,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('/category', CategoryController::class);
 
         Route::apiResource('/product', ProductController::class);
+
+        Route::post('/product/{product}/attachments', [AttachmentController::class, 'store']);
+        Route::delete('/attachments/{attachment}', [AttachmentController::class, 'store']);
 
         Route::apiResource('/warehouse', WarehouseController::class);
         Route::apiResource('/stock', StockController::class);

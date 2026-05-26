@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Product::class, 'product');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -20,6 +25,7 @@ class ProductController extends Controller
             'category',
             'unit',
             'stocks',
+            'attachments'
         ])->latest()->paginate();
 
         return ProductResource::collection($products);
@@ -30,13 +36,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $data = $request->validated();
-
-        if ($request->hasFile('image')) {
-            $data['image_path'] = $request->file('image')->store('products', 'public');
-        }
-
-        Product::create($data);
+        $data = Product::create($request->validated());
 
         return new ProductResource($data);
     }
@@ -46,6 +46,13 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        $product->load([
+            'category',
+            'unit',
+            'stocks',
+            'attachments',
+        ]);
+
         return new ProductResource($product);
     }
 
@@ -54,21 +61,9 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-        $data = $request->validated();
+        $product->update($request->validated());
 
-        if ($request->hasFile('image')) {
-            if ($product->image_path) {
-                Storage::disk('public')->delete($product->image_path);
-            }
-
-            $data['image_path'] = $request->file('image')->store('products', 'public');
-        }
-
-        $product->update($data);
-        
-        $product->fresh();
-
-        return new ProductResource($product);
+        return new ProductResource($product->fresh());
     }
 
     /**

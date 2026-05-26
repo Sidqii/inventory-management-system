@@ -4,6 +4,7 @@ namespace App\Http\Resources\Catalog;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class ProductResource extends JsonResource
 {
@@ -29,13 +30,16 @@ class ProductResource extends JsonResource
                 'symbol' => $this->unit->symbol,
             ],
 
-            'image' => $this->image_path,
             'description' => $this->description,
+
+            'attachments' => AttachmentResource::collection(
+                $this->whenLoaded('attachments'),
+            ),
 
             'date' => [
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at,
-            ]
+            ],
         ];
     }
 }

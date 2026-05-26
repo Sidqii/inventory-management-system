@@ -5,8 +5,8 @@ namespace App\Services\Transaction;
 use App\Enum\Transaction\StockMovementType;
 use App\Enum\Transaction\StockRequestStatus;
 use App\Models\Inventory\Stock;
-use App\Models\Transactions\StockMovement;
-use App\Models\Transactions\StockRequest;
+use App\Models\Transaction\StockMovement;
+use App\Models\Transaction\StockRequest;
 use Illuminate\Support\Facades\Auth;
 
 class StockRequestService

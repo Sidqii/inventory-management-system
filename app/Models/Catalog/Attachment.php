@@ -12,7 +12,6 @@ class Attachment extends Model
 
     protected $fillable = [
         'user_id',
-        'attachable',
         'file_name',
         'file_path',
         'file_type',
@@ -21,6 +20,11 @@ class Attachment extends Model
 
     public function uploader()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function attachable()
+    {
+        return $this->morphTo();
     }
 }

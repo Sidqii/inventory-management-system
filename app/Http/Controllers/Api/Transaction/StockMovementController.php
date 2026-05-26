@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Transaction;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Trasnsaction\StockMovementResource;
-use App\Models\Transactions\StockMovement;
+use App\Models\Transaction\StockMovement;
 use Illuminate\Http\Request;
 
 class StockMovementController extends Controller

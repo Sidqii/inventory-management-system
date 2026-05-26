@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Transaction;
 
 use App\Http\Controllers\Controller;
 use App\Enum\Transaction\StockRequestStatus;
-use App\Models\Transactions\StockRequest;
+use App\Models\Transaction\StockRequest;
 use App\Http\Requests\Transaction\ApproveStockRequest;
 use App\Http\Requests\Transaction\FulfillStockRequest;
 use App\Http\Requests\Transaction\StoreStockRequest;
@@ -18,8 +18,13 @@ use function Illuminate\Support\now;
 
 class StockRequestController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(StockRequest::class, 'stockRequest');
+    }
     /**
-     * Display a listing of the resource.
+     * Display a listing of Stock request.
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
@@ -35,7 +40,10 @@ class StockRequestController extends Controller
     }
 
     /**
-     * Make user request form
+     * Submit a request to borrow stock.
+     * @param StoreStockRequest $request
+     * @param StockRequestService $service
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreStockRequest $request, StockRequestService $service)
     {
@@ -59,7 +67,10 @@ class StockRequestController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified requested stock.
+     * @param StockRequest $stockRequest
+     * @param StockRequestService $service
+     * @return StockRequestResource
      */
     public function show(StockRequest $stockRequest, StockRequestService $service)
     {
@@ -69,7 +80,11 @@ class StockRequestController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the data that has already been submitted.
+     * @param UpdateStockRequest $request
+     * @param StockRequest $stockRequest
+     * @param StockRequestService $service
+     * @return StockRequestResource|\Throwable
      */
     public function update(UpdateStockRequest $request, StockRequest $stockRequest, StockRequestService $service)
     {
@@ -104,10 +119,16 @@ class StockRequestController extends Controller
     }
 
     /**
-     * Approve requests and update status
+     * Approve the submitted data.
+     * @param ApproveStockRequest $request
+     * @param StockRequest $stockRequest
+     * @param StockRequestService $service
+     * @return StockRequestResource
      */
     public function approve(ApproveStockRequest $request, StockRequest $stockRequest, StockRequestService $service)
     {
+        $this->authorize('approve', $stockRequest);
+
         if ($stockRequest->status !== StockRequestStatus::PENDING) {
             abort(422, 'Only pending requests can be approved.');
         }
@@ -131,8 +152,16 @@ class StockRequestController extends Controller
         );
     }
 
+    /**
+     * Reject the data that has been submitted.
+     * @param StockRequest $stockRequest
+     * @param StockRequestService $service
+     * @return StockRequestResource
+     */
     public function reject(StockRequest $stockRequest, StockRequestService $service)
     {
+        $this->authorize('reject', $stockRequest);
+
         if ($stockRequest->status !== StockRequestStatus::PENDING) {
             abort(422, 'Only pending requests can be rejected.');
         }
@@ -148,8 +177,17 @@ class StockRequestController extends Controller
         );
     }
 
+    /**
+     * Record approval of goods submissions.
+     * @param FulfillStockRequest $request
+     * @param StockRequest $stockRequest
+     * @param StockRequestService $service
+     * @return StockRequestResource
+     */
     public function fulfill(FulfillStockRequest $request, StockRequest $stockRequest, StockRequestService $service)
     {
+        $this->authorize('fulfill', $stockRequest);
+
         if ($stockRequest->status !== StockRequestStatus::APPROVED) {
             abort(422, 'Only approved requests can be fulfilled.');
         }
@@ -174,7 +212,9 @@ class StockRequestController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete data that is still pending.
+     * @param StockRequest $stockRequest
+     * @return \Illuminate\Http\Response
      */
     public function destroy(StockRequest $stockRequest)
     {

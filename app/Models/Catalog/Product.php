@@ -19,7 +19,7 @@ class Product extends Model
         'name',
         'description',
         'minimum_stock',
-        'image_path',
+        // 'image_path',
     ];
 
     public function category()
@@ -45,5 +45,10 @@ class Product extends Model
     public function stockMovementItems()
     {
         return $this->hasMany(StockMovementItem::class);
+    }
+
+    public function attachments()
+    {
+        return $this->morphMany(Attachment::class, 'attachable');
     }
 }

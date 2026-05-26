@@ -20,5 +20,19 @@ class UserSeeder extends Seeder
             'email' => 'racoon@mail.com',
             'password' => 'racoon123'
         ]);
+
+        User::create([
+            'name' => 'Emma',
+            'role' => Role::STAFF,
+            'email' => 'emma@mail.com',
+            'password' => 'emma123'
+        ]);
+
+        User::create([
+            'name' => 'Pororo',
+            'role' => Role::EMPLOYEE,
+            'email' => 'pororo@mail.com',
+            'password' => 'pororo123',
+        ]);
     }
 }

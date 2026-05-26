@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Transactions;
+namespace App\Models\Transaction;
 
 use App\Enum\Transaction\StockMovementType;
 use App\Models\Catalog\Warehouse;

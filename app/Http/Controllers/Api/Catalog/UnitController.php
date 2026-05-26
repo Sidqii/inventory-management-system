@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class UnitController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Unit::class, 'unit');
+    }
+
     /**
      * Display a listing of the resource.
      */
