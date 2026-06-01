@@ -3,8 +3,8 @@
 namespace App\Models\Catalog;
 
 use App\Models\Inventory\Stock;
-use App\Models\Transactions\StockMovementItem;
-use App\Models\Transactions\StockRequestItem;
+use App\Models\Transaction\StockMovementItem;
+use App\Models\Transaction\StockRequestItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
