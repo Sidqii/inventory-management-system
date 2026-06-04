@@ -9,7 +9,9 @@ use App\Http\Requests\Authentication\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RateLimiter;
 
 class AuthController extends Controller
 {
@@ -25,9 +27,9 @@ class AuthController extends Controller
     }
 
     /**
-     * Function for Registration.
+     * Summary of store
      * @param RegisterRequest $request
-     * @return UserResource
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(RegisterRequest $request)
     {
@@ -36,9 +38,14 @@ class AuthController extends Controller
             'role' => Role::EMPLOYEE,
         ]);
 
+        $user->sendEmailVerificationNotification();
+
         $user->refresh();
 
-        return new UserResource($user);
+        return response()->json([
+            'message' => 'Registration successful, please verify your email',
+            'data' => new UserResource($user),
+        ], 201);
     }
 
     /**
@@ -58,15 +65,30 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        if (! User::where('email', $request->email)->exists()) {
-            abort(404, 'User not found');
-        }
-
         if (! Auth::attempt($request->validated())) {
             abort(401, 'Invalid credentials.');
         }
 
         $user = $request->user();
+
+        $key = Str::lower($user->email) . '|veriviation-email';
+
+        if (! $user->hasVerifiedEmail()) {
+            $user->sendEmailVerificationNotification();
+
+            if (RateLimiter::tooManyAttempts($key, 3)) {
+                return response()->json([
+                    'message' => 'Too many varification email requests. Please try again later.',
+                    'available_in_seconds' => RateLimiter::availableIn($key),
+                ]);
+            }
+
+            return response()->json([
+                'message' => 'Please verify your email. Verification link has been sent.',
+            ], 403);
+        }
+
+        RateLimiter::hit($key, 60);
 
         $token = $user->createToken('auth-token')->plainTextToken;
 

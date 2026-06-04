@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Http\Controllers\Web\Authentication;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Authentication\LoginRequest;
+use App\Http\Requests\Authentication\RegisterRequest;
+use Illuminate\Support\Facades\Auth;
+
+class AuthController extends Controller
+{
+    public function form()
+    {
+        return view('authentication');
+    }
+
+    public function register(RegisterRequest $request)
+    {
+        //
+    }
+
+    public function login(LoginRequest $request)
+    {
+        if (! Auth::attempt($request->validated())) {
+            return back()->withErrors([
+                'email' => 'invalid credentials'
+            ]);
+        }
+
+        $request->session()->regenerate();
+
+        return redirect()->route('dashboard');
+    }
+}

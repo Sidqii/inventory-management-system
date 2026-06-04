@@ -9,11 +9,14 @@ use App\Http\Controllers\Api\Catalog\WarehouseController;
 use App\Http\Controllers\Api\Inventory\StockController;
 use App\Http\Controllers\Api\Transaction\StockMovementController;
 use App\Http\Controllers\Api\Transaction\StockRequestController;
+use App\Http\Controllers\EmailVerificationController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('authentication')->group(function () {
     Route::post('/register', [AuthController::class, 'store']);
     Route::post('/login', [AuthController::class, 'login']);
+
+    Route::post('/email/verification-notification', [EmailVerificationController::class, 'resend']);
 });
 
 Route::middleware('auth:sanctum')->group(function () {
