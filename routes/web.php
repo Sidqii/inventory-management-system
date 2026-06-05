@@ -9,14 +9,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/auth', [AuthController::class, 'form'])->name('auth.form');
 
+Route::get('/login', [AuthController::class, 'form'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
     ->middleware(['signed'])->name('verification.verify');
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::post('/email/verification-notification', [EmailVerificationController::class, 'resend'])
         ->name('verification.send');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    
 });

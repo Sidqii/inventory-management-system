@@ -4,45 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <title>Login</title>
 </head>
 
-<body>
-    <h1>Authentication your data</h1>
+<body class="bg-zinc-100">
 
-    <form action="{{ route('login') }}" method="post">
-        @csrf
+    <div class="flex min-h-screen items-center justify-center">
 
-        <div>
-            <label for="email">Email</label>
+        <div class="w-full max-w-md rounded-xl bg-white p-8 shadow">
 
-            <input
-                type="email"
-                name="email"
-                value="{{ old('email') }}"
-                placeholder="Input your email">
+            <h1 class="mb-2 text-2xl font-bold">
+                Inventory Management System
+            </h1>
 
-            @error('email')
-            {{ $message }}
-            @enderror
+            <p class="mb-6 text-sm text-zinc-500">
+                Sign in to continue
+            </p>
+
+            <form action="{{ route('login') }}" method="POST">
+                @csrf
+
+                <div class="mb-4">
+                    <label class="mb-2 block text-sm font-medium">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        class="w-full rounded-lg border border-zinc-300 px-3 py-2">
+                </div>
+
+                <div class="mb-6">
+                    <label class="mb-2 block text-sm font-medium">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        class="w-full rounded-lg border border-zinc-300 px-3 py-2">
+                </div>
+
+                <button
+                    type="submit"
+                    class="w-full rounded-lg bg-zinc-900 py-2 text-white">
+                    Login
+                </button>
+
+            </form>
+
         </div>
 
-        <br>
+    </div>
 
-        <div>
-            <label for="password">Password</label>
-
-            <input type="password" name="password" placeholder="Input your password">
-
-            @error('password')
-            {{ $message }}
-            @enderror
-        </div>
-
-        <br>
-
-        <button type="submit">Login</button>
-    </form>
 </body>
 
 </html>
