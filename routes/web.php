@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\Web\Authentication\AuthController;
+use App\Http\Controllers\Web\Authentication\CredentialController;
 use App\Http\Controllers\Web\Catalog\DashboardController;
+use App\Http\Controllers\Web\Catalog\HistoryController;
+use App\Http\Controllers\Web\Catalog\InventoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,5 +23,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/email/verification-notification', [EmailVerificationController::class, 'resend'])
         ->name('verification.send');
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::prefix('catalog')->group(function () {
+        Route::resource('/dashboard', DashboardController::class);
+
+        Route::resource('/inventory', InventoryController::class);
+
+        Route::resource('/history', HistoryController::class);
+
+        Route::resource('/credential', CredentialController::class);
+    });
 });

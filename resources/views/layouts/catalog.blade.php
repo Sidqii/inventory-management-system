@@ -21,6 +21,9 @@
                 <div class="mx-auto w-full">
                     @yield('content')
                 </div>
+
+                @stack('scripts')
+
             </main>
 
             {{-- Mobile Bottom Navigation --}}

@@ -1,38 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Web\Catalog;
+namespace App\Http\Controllers\Web\Authentication;
 
 use App\Http\Controllers\Controller;
-use App\Models\Catalog\Product;
-use App\Models\Inventory\Stock;
-use App\Models\Transaction\StockMovement;
-use App\Models\Transaction\StockRequest;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class CredentialController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('catalog.dashboard', [
-            'items' => Product::all(),
-            'products' => Product::count(),
-
-            'stock' => Stock::sum('quantity'),
-
-            'totalRequests' => StockRequest::count(),
-            'totalMovements' => StockMovement::count(),
-
-            'latestRequests' => StockRequest::with([
-                'user',
-                'warehouse',
-                'items.product',
-                'approver',
-                'completedBy',
-            ])->latest()->get()
-        ]);
+        return view('auth.credential');
     }
 
     /**

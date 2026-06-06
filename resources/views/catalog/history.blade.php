@@ -1,9 +1,9 @@
 @extends('layouts.catalog')
 
-@section('title', 'Inventory')
+@section('title', 'History')
 
 @section('content')
 <div>
-    <p>Test Page Inventory</p>
+    <p>Test Page History</p>
 </div>
 @endsection
