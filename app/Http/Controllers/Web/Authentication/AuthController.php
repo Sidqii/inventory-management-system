@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function form()
     {
-        return view('authentication');
+        return view('auth.auth-login');
     }
 
     public function register(RegisterRequest $request)
@@ -24,7 +24,7 @@ class AuthController extends Controller
     {
         if (! Auth::attempt($request->validated())) {
             return back()->withErrors([
-                'email' => 'invalid credentials'
+                'auth' => 'invalid credentials'
             ]);
         }
 

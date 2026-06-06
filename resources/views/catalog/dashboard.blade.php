@@ -1,54 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.catalog')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+@section('title', 'Dashboard')
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+@section('content')
+<div class="space-y-6">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    {{-- Summary Cards --}}
+    <section class="grid grid-cols-2 gap-3">
+        @include('components.dashboard.summary-card', [
+        'title' => 'Products',
+        'value' => $products
+        ])
 
-    <title>Inventatis Management System</title>
-</head>
+        @include('components.dashboard.summary-card', [
+        'title' => 'Total Items',
+        'value' => $stock
+        ])
 
-<body>
-    <div class="flex justify-between bg-zinc-900 p-4">
-        <h1 class="text-x1 text-white">Inventory Management System</h1>
+        @include('components.dashboard.summary-card', [
+        'title' => 'Requests',
+        'value' => $totalRequests
+        ])
 
-        <button>
-            <i class="bi bi-list text-white"></i>
-        </button>
-    </div>
+        @include('components.dashboard.summary-card', [
+        'title' => 'Movements',
+        'value' => $totalMovements
+        ])
+    </section>
 
-    <main class="min-h-screen p-6">
-        <div class="mb-6">
-            <h2 class="text-2xl font-bold text-zinc-900">Dashboard</h2>
-            <p class="text-sm text-zinc-400">Overview inventory activity.</p>
+    {{-- Quick Actions --}}
+    <section class="rounded-2xl bg-white p-4 shadow-sm">
+        <h2 class="mb-4 font-semibold">Quick Actions</h2>
+
+        <div class="grid grid-cols-2 gap-3">
+            <a href="#" class="rounded-xl bg-zinc-900 px-4 py-3 text-center text-sm text-white">
+                Add Product
+            </a>
+
+            <a href="#" class="rounded-xl border border-zinc-200 px-4 py-3 text-center text-sm">
+                New Request
+            </a>
+        </div>
+    </section>
+
+    {{-- Latest Requests --}}
+    <section class="rounded-2xl bg-white p-4 shadow-sm">
+        <div class="mb-4 flex items-center justify-between">
+            <h2 class="font-semibold">Latest Requests</h2>
+            <a href="#" class="text-sm text-zinc-500">View all</a>
         </div>
 
-        <div class="grid grid-cols-4 gap-4">
-            <div class="rounded-xl bg-zinc-900 p-5 border border-zinc-800">
-                <p class="text-sm text-zinc-400">Products</p>
-                <h3 class="mt-2 text-3xl font-bold text-white">124</h3>
+        <div class="space-y-3">
+            <div class="rounded-xl border border-zinc-200 p-3">
+                <p class="font-medium">Request #001</p>
+                <p class="text-sm text-zinc-500">Warehouse A • Pending</p>
             </div>
 
-            <div class="rounded-xl bg-zinc-900 p-5 border border-zinc-800">
-                <p class="text-sm text-zinc-400">Warehouses</p>
-                <h3 class="mt-2 text-3xl font-bold text-white">4</h3>
-            </div>
-
-            <div class="rounded-xl bg-zinc-900 p-5 border border-zinc-800">
-                <p class="text-sm text-zinc-400">Stock Requests</p>
-                <h3 class="mt-2 text-3xl font-bold text-white">18</h3>
-            </div>
-
-            <div class="rounded-xl bg-zinc-900 p-5 border border-zinc-800">
-                <p class="text-sm text-zinc-400">Movements</p>
-                <h3 class="mt-2 text-3xl font-bold text-white">52</h3>
+            <div class="rounded-xl border border-zinc-200 p-3">
+                <p class="font-medium">Request #002</p>
+                <p class="text-sm text-zinc-500">Warehouse B • Approved</p>
             </div>
         </div>
-    </main>
-</body>
+    </section>
 
-</html>
+</div>
+@endsection
