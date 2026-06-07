@@ -2,7 +2,7 @@
     <div class="flex items-center justify-between">
         <div>
             <p class="text-sm text-zinc-500">Welcome back</p>
-            <h1 class="text-lg font-bold">Inventory</h1>
+            <h1 class="text-lg font-bold">{{ auth()->user()->name }}</h1>
         </div>
 
         <button class="rounded-full bg-zinc-100 px-3 py-2 text-l md:hidden">

@@ -23,7 +23,6 @@
                 </div>
 
                 @stack('scripts')
-
             </main>
 
             {{-- Mobile Bottom Navigation --}}

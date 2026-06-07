@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Catalog;
 
 use App\Http\Controllers\Controller;
+use App\Models\Catalog\Product;
 use Illuminate\Http\Request;
 
 class InventoryController extends Controller
@@ -12,7 +13,9 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        return view('catalog.inventory');
+        return view('catalog.inventory', [
+            'products' => Product::all(),
+        ]);
     }
 
     /**
