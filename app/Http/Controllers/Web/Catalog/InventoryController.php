@@ -13,7 +13,7 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        return view('catalog.inventory', [
+        return view('sections.catalog.inventory', [
             'products' => Product::all(),
         ]);
     }

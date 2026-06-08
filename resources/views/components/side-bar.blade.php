@@ -5,8 +5,8 @@
     </div>
 
     <nav class="space-y-1 px-4">
-        <a href="{{ route('dashboard.index') }}"
-            class="block rounded-xl {{ request()->routeIs('dashboard.index') ? 'bg-zinc-900 text-white px-4 py-3' : 'text-zinc-600 hover:bg-zinc-100'}} px-4 py-1 text-sm">
+        <a href="{{ route('dashboard.view') }}"
+            class="block rounded-xl {{ request()->routeIs('dashboard.view') ? 'bg-zinc-900 text-white px-4 py-3' : 'text-zinc-600 hover:bg-zinc-100'}} px-4 py-1 text-sm">
             Dashboard
         </a>
 
@@ -15,7 +15,7 @@
             Products
         </a>
 
-        <a href="{{ route('history.index') }}"
+        <a href="#"
             class="block rounded-xl {{ request()->routeIs('history.index') ? 'bg-zinc-900 text-white px-4 py-3' : 'text-zinc-600 hover:bg-zinc-100'}} px-4 py-1 text-sm">
             History
         </a>

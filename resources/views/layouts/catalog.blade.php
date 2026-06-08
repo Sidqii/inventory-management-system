@@ -2,34 +2,31 @@
 <html lang="en">
 
 <head>
-    @include('layouts.partials.head')
+    @include('headline')
 </head>
 
-<body class="bg-zinc-100 text-zinc-900">
-
+<body class="select-none bg-slate-50 text-zinc-900">
     <div class="min-h-screen md:flex">
-        {{-- Desktop Sidebar --}}
-        @include('components.desktop.sidebar')
+        <!-- sidebar device desktop -->
+        @include('components.side-bar')
 
-        {{-- Main Area --}}
         <div class="flex min-h-screen flex-1 flex-col">
-            {{-- Top Bar --}}
-            @include('components.desktop.topbar')
+            <!-- top bar -->
+            @include('components.top-bar')
 
-            {{-- Page Content --}}
+            <!-- main content -->
             <main class="flex-1 px-4 py-6 pb-24 md:pb-8">
                 <div class="mx-auto w-full">
                     @yield('content')
                 </div>
-
-                @stack('scripts')
             </main>
 
-            {{-- Mobile Bottom Navigation --}}
-            @include('components.mobile.bottom-navigation')
+            <!-- navbar device mobile -->
+            @include('components.bottom-navbar')
         </div>
     </div>
-
+    <!-- scripts -->
+    @stack('scripts')
 </body>
 
 </html>

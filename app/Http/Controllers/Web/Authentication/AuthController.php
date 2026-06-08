@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function form()
     {
-        return view('auth.auth-login');
+        return view('sections.auth.auth-form');
     }
 
     public function register(RegisterRequest $request)
@@ -30,7 +30,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('dashboard.index');
+        return redirect()->route('dashboard.view');
     }
 
     public function logout(Request $request)
@@ -41,6 +41,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect()->route('form');
     }
 }

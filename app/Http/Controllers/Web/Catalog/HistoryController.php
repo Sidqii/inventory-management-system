@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Catalog;
 
 use App\Http\Controllers\Controller;
+use App\Models\Transaction\StockMovement;
 use Illuminate\Http\Request;
 
 class HistoryController extends Controller
@@ -12,7 +13,9 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        return view('catalog.history');
+        return view('sections.catalog.dashboard', [
+            'movements' => StockMovement::all(),
+        ]);
     }
 
     /**

@@ -16,7 +16,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('catalog.dashboard', [
+        return view('sections.catalog.dashboard', [
             'items' => Product::all(),
             'products' => Product::count(),
 

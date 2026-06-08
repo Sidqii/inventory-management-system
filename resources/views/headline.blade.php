@@ -3,6 +3,8 @@
 
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 <link rel="icon" type="image/png" href="/favicon-96x96.png?v=20260606" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260606">
 <link rel="shortcut icon" href="/favicon.ico?v=20260606">

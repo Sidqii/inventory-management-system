@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    @include('layouts.partials.head')
+    @include('headline')
 </head>
 
-<body class="bg-zinc-100">
-    <div class="flex min-h-screen items-center justify-center bg-white px-4">
+<body>
+    <div class="flex min-h-screen items-center bg-slate-50 justify-center px-4">
         @yield('content')
     </div>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Authentication;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CredentialController extends Controller
 {
@@ -12,7 +13,9 @@ class CredentialController extends Controller
      */
     public function index()
     {
-        return view('auth.credential');
+        return view('sections.auth.credential', [
+            'user' => Auth::user()
+        ]);
     }
 
     /**
