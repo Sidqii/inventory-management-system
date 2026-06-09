@@ -5,7 +5,7 @@
             <h1 class="text-lg font-bold">{{ auth()->user()->name }}</h1>
         </div>
 
-        <button class="rounded-full bg-zinc-100 px-3 py-2 text-l md:hidden">
+        <button class="rounded-full px-1 py-2 text-l md:hidden">
             <i class="bi bi-three-dots-vertical"></i>
         </button>
     </div>

@@ -11,7 +11,13 @@
         </div>
 
         <div>
-            <h1 class="text-xl font-bold">{{ $user->name }}</h1>
+            <div class="flex items-center justify-start gap-2">
+                <h1 class="text-xl font-bold">{{ $user->name }}</h1>
+
+                @if ($user->hasVerifiedEmail())
+                <i class="bi bi-patch-check-fill mr-2"></i>
+                @endif
+            </div>
 
             <div class="flex items-center gap-2">
                 <p
@@ -58,13 +64,13 @@
         <p class="text-sm text-zinc-500">Email Verification</p>
 
         @if ($user->hasVerifiedEmail())
-        <span class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 txt-sm font-medium text-green-700">
-            <i class="bi bi-patch-check-fill mr-2"> Verified</i>
+        <span class="inline-flex items-center rounded-full bg-green-100 px-2 py-1 txt-sm font-medium text-green-700">
+            <i class="bi bi-patch-check-fill"></i>
         </span>
 
         @else
-        <span class="inline-flex items-center rounded-full bg-red-100 px-3 py-1 txt-sm font-medium text-red-700">
-            <i class="bi bi-exclamation-circle-fill mr-2"> Not Verified</i>
+        <span class="inline-flex items-center rounded-full bg-red-100 px-2 py-1 txt-sm font-medium text-red-700">
+            <i class="bi bi-exclamation-circle-fill"></i>
         </span>
         @endif
     </div>
@@ -74,13 +80,13 @@
         id="logout-form"
         action="{{ route('logout') }}"
         method="POST"
-        class="flex justify-end">
+        class="flex justify-end mt-4">
 
         @csrf
 
         <button
             type="submit"
-            class="cursor-pointer md:fixed bottom-5 rounded-lg bg-red-500 px-4 py-2 text-sm font-regular text-white hover:bg-red-600">
+            class="cursor-pointer md:fixed bottom-5 rounded-lg bg-red-500 px-4 py-3 text-sm font-regular text-white hover:bg-red-600">
             Logout Account
         </button>
     </form>

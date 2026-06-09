@@ -56,7 +56,7 @@
 
         <!-- listview -->
         <div class="space-y-3">
-            @foreach ($latestRequests as $latest)
+            @forelse ($latestRequests as $latest)
             <div class="rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm">
                 <!-- (row) card info header -->
                 <div class="mb-3 flex items-start justify-between gap-3">
@@ -100,7 +100,13 @@
                     @endforeach
                 </div>
             </div>
-            @endforeach
+
+            @empty
+
+            <div class="flex items-center justify-center rounded-xl bg-zinc-50 px-4 py-14 hover:shadow-sm">
+                <p class="text-zinc-500 font-semibold">Its'empty here, just relax ~</p>
+            </div>
+            @endforelse
         </div>
     </section>
 </div>

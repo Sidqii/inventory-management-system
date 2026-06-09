@@ -13,7 +13,7 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        return view('sections.catalog.dashboard', [
+        return view('sections.catalog.history', [
             'movements' => StockMovement::all(),
         ]);
     }

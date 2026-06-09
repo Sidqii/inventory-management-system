@@ -5,19 +5,19 @@
             <i class="bi {{ request()->routeIs('dashboard.view') ? 'bi-house-fill' : 'bi-house' }} text-lg"></i>
         </a>
 
-        <a href="{{ route('inventory.index') }}"
-            class="py-3 {{ request()->routeIs('inventory.index') ? 'text-zinc-900' : 'text-zinc-500'}}">
-            <i class="bi {{ request()->routeIs('inventory.index') ? 'bi-box-fill' : 'bi-box' }}  text-lg"></i>
+        <a href="{{ route('inventory.view') }}"
+            class="py-3 {{ request()->routeIs('inventory.view') ? 'text-zinc-900' : 'text-zinc-500'}}">
+            <i class="bi {{ request()->routeIs('inventory.view') ? 'bi-box-fill' : 'bi-box' }}  text-lg"></i>
         </a>
 
         <a href="#"
-            class="py-3 {{ request()->routeIs('history.index') ? 'text-zinc-900' : 'text-zinc-500'}}">
-            <i class="bi {{ request()->routeIs('history.index') ? 'bi-clock-fill' : 'bi-clock' }}  text-lg"></i>
+            class="py-3 {{ request()->routeIs('history.view') ? 'text-zinc-900' : 'text-zinc-500'}}">
+            <i class="bi {{ request()->routeIs('history.view') ? 'bi-clock-fill' : 'bi-clock' }}  text-lg"></i>
         </a>
 
-        <a href="{{ route('credential.index') }}"
-            class="py-3 {{ request()->routeIs('credential.index') ? 'text-zinc-900' : 'text-zinc-500'}}">
-            <i class="bi {{ request()->routeIs('credential.index') ? 'bi-person-fill' : 'bi-person' }}  text-lg"></i>
+        <a href="{{ route('credential.view') }}"
+            class="py-3 {{ request()->routeIs('credential.view') ? 'text-zinc-900' : 'text-zinc-500'}}">
+            <i class="bi {{ request()->routeIs('credential.view') ? 'bi-person-fill' : 'bi-person' }}  text-lg"></i>
         </a>
     </div>
 </nav>

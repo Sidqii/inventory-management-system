@@ -10,18 +10,18 @@
             Dashboard
         </a>
 
-        <a href="{{ route('inventory.index') }}"
-            class="block rounded-xl {{ request()->routeIs('inventory.index') ? 'bg-zinc-900 text-white px-4 py-3' : 'text-zinc-600 hover:bg-zinc-100'}} px-4 py-1 text-sm">
+        <a href="{{ route('inventory.view') }}"
+            class="block rounded-xl {{ request()->routeIs('inventory.view') ? 'bg-zinc-900 text-white px-4 py-3' : 'text-zinc-600 hover:bg-zinc-100'}} px-4 py-1 text-sm">
             Products
         </a>
 
-        <a href="#"
-            class="block rounded-xl {{ request()->routeIs('history.index') ? 'bg-zinc-900 text-white px-4 py-3' : 'text-zinc-600 hover:bg-zinc-100'}} px-4 py-1 text-sm">
+        <a href="{{ route('movement.view') }}"
+            class="block rounded-xl {{ request()->routeIs('movement.view') ? 'bg-zinc-900 text-white px-4 py-3' : 'text-zinc-600 hover:bg-zinc-100'}} px-4 py-1 text-sm">
             History
         </a>
 
-        <a href="{{ route('credential.index') }}"
-            class="block rounded-xl {{ request()->routeIs('credential.index') ? 'bg-zinc-900 text-white px-4 py-3' : 'text-zinc-600 hover:bg-zinc-100'}} px-4 py-1 text-sm">
+        <a href="{{ route('credential.view') }}"
+            class="block rounded-xl {{ request()->routeIs('credential.view') ? 'bg-zinc-900 text-white px-4 py-3' : 'text-zinc-600 hover:bg-zinc-100'}} px-4 py-1 text-sm">
             Profile
         </a>
     </nav>
