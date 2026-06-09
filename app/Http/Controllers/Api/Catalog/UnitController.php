@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Catalog;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Catalog\UnitRequest;
+use App\Http\Resources\Catalog\UnitResource;
 use App\Models\Catalog\Unit;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,7 @@ class UnitController extends Controller
      */
     public function index()
     {
-        return Unit::all();
+        return UnitResource::collection(Unit::all());
     }
 
     /**
@@ -35,7 +36,7 @@ class UnitController extends Controller
      */
     public function show(Unit $unit)
     {
-        return $unit;
+        return new UnitResource($unit);
     }
 
     /**

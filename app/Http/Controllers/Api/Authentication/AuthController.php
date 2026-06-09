@@ -71,30 +71,30 @@ class AuthController extends Controller
 
         $user = $request->user();
 
-        $key = Str::lower($user->email) . '|veriviation-email';
+        $key = Str::lower($user->email) . '|verifiation-email';
 
         if (! $user->hasVerifiedEmail()) {
-            $user->sendEmailVerificationNotification();
-
             if (RateLimiter::tooManyAttempts($key, 3)) {
                 return response()->json([
-                    'message' => 'Too many varification email requests. Please try again later.',
+                    'message' => 'Too many verification email requests. Please try again later.',
                     'available_in_seconds' => RateLimiter::availableIn($key),
                 ]);
             }
+
+            RateLimiter::hit($key, 60);
+
+            $user->sendEmailVerificationNotification();
 
             return response()->json([
                 'message' => 'Please verify your email. Verification link has been sent.',
             ], 403);
         }
 
-        RateLimiter::hit($key, 60);
-
         $token = $user->createToken('auth-token')->plainTextToken;
 
         return response()->json([
             'access_token' => $token,
-            'credentials' => new UserResource($user),
+            'credential' => new UserResource($user),
         ]);
     }
 

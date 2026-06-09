@@ -21,7 +21,7 @@ class EmailVerificationController extends Controller
             $user->markEmailAsVerified();
         }
 
-        return view('auth.verify-success');
+        return view('layouts.auth-verification');
     }
 
     public function resend(Request $request)

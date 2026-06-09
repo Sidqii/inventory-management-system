@@ -26,10 +26,6 @@ class AttachmentResource extends JsonResource
 
             'file_url' => url(Storage::url($this->file_path)),
 
-            // 'uploaded_by' => [
-            //     'id' => $this->uploader->id,
-            //     'name' => $this->uploader->name,
-            // ],
             'uploaded_at' => $this->created_at,
         ];
     }

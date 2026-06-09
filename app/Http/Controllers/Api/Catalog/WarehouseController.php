@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Catalog;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Catalog\WarehouseRequest;
+use App\Http\Resources\Catalog\WarehouseResource;
 use App\Models\Catalog\Warehouse;
 
 class WarehouseController extends Controller
@@ -18,7 +19,7 @@ class WarehouseController extends Controller
      */
     public function index()
     {
-        return Warehouse::all();
+        return WarehouseResource::collection(Warehouse::all());
     }
 
     /**
@@ -34,7 +35,8 @@ class WarehouseController extends Controller
      */
     public function show(Warehouse $warehouse)
     {
-        return $warehouse;
+        return new WarehouseResource($warehouse
+        );
     }
 
     /**
