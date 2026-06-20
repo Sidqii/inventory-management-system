@@ -18,14 +18,16 @@ class UserSeeder extends Seeder
             'name' => 'Racoon',
             'role' => Role::ADMIN,
             'email' => 'racoon@mail.com',
-            'password' => 'racoon123'
+            'password' => 'racoon123',
+            'email_verified_at' => now(),
         ]);
 
         User::create([
             'name' => 'Emma',
             'role' => Role::STAFF,
             'email' => 'emma@mail.com',
-            'password' => 'emma123'
+            'password' => 'emma123',
+            'email_verified_at' => now(),
         ]);
 
         User::create([
@@ -33,6 +35,7 @@ class UserSeeder extends Seeder
             'role' => Role::EMPLOYEE,
             'email' => 'pororo@mail.com',
             'password' => 'pororo123',
+            'email_verified_at' => now(),
         ]);
     }
 }

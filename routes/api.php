@@ -45,6 +45,8 @@ Route::prefix('v1')->group(function () {
 
             Route::post('/fulfill/{stockRequest}', [StockRequestController::class, 'fulfill']);
 
+            Route::get('/export', [StockMovementController::class, 'export']);
+
             Route::put('/update/{stockRequest}', [StockRequestController::class, 'update']);
 
             Route::get('/request-item', [StockRequestController::class, 'index']);

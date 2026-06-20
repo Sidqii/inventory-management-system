@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Trasnsaction;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -21,11 +22,17 @@ class StockMovementResource extends JsonResource
             'movement_type' => $this->movement_type,
             'note' => $this->note,
 
-            'user' => [
-                'id' => $this->user?->id,
-                'name' => $this->user?->name,
-                'email' => $this->user?->email,
-            ],
+            'request_by' => UserResource::make(
+                $this->reference?->user,
+            ),
+
+            'approved_by' => UserResource::make(
+                $this->reference?->approver
+            ),
+
+            'completed_by' => UserResource::make(
+                $this->reference?->completedBy
+            ),
 
             'warehouse' => [
                 'id' => $this->warehouse?->id,

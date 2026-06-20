@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers\Api\Transaction;
 
+use App\Exports\StockMovementsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Trasnsaction\StockMovementResource;
 use App\Models\Transaction\StockMovement;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StockMovementController extends Controller
 {
+    public function export()
+    {
+        return Excel::download(new StockMovementsExport(), 'stock-movements.xlsx');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -19,6 +26,8 @@ class StockMovementController extends Controller
             'warehouse',
             'items.product',
             'reference',
+            'reference.approver',
+            'reference.completedBy',
         ])->latest()->paginate();
 
         return StockMovementResource::collection($stockMovents);
@@ -42,6 +51,8 @@ class StockMovementController extends Controller
             'warehouse',
             'items.product',
             'reference',
+            'reference.approver',
+            'reference.completedBy',
         ]);
 
         return new StockMovementResource($stockMovement);
