@@ -38,12 +38,15 @@ Route::prefix('v1')->group(function () {
         });
 
         Route::prefix('transaction')->group(function () {
-            Route::post('/request', [StockRequestController::class, 'store']);
 
-            Route::post('/approve/{stockRequest}', [StockRequestController::class, 'approve']);
-            Route::post('/reject/{stockRequest}', [StockRequestController::class, 'reject']);
+            Route::middleware('idempotency')->group(function () {
+                Route::post('/request', [StockRequestController::class, 'store']);
 
-            Route::post('/fulfill/{stockRequest}', [StockRequestController::class, 'fulfill']);
+                Route::post('/approve/{stockRequest}', [StockRequestController::class, 'approve']);
+                Route::post('/reject/{stockRequest}', [StockRequestController::class, 'reject']);
+
+                Route::post('/fulfill/{stockRequest}', [StockRequestController::class, 'fulfill']);
+            });
 
             Route::get('/export', [StockMovementController::class, 'export']);
 
